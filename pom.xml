@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>cs-server-web</module>
+        <module>cs-server-bizservice</module>
+        <module>cs-server-api</module>
+        <module>cs-server-model</module>
+        <module>cs-server-base</module>
+        <module>cs-server-file</module>
+        <module>cs-server-search</module>
+        <module>cs-server-oauth2</module>
+    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.5.RELEASE</version>
+    </parent>
+
+    <groupId>com.dist</groupId>
+    <artifactId>cs-server-root</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>cs-server-root</name>
+    <description>城市设计（City simulation）父工程</description>
+
+
+    <repositories>
+        <repository>
+            <id>DistNexus</id>
+            <url>http://58.246.138.178:22280/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.plugin.version>3.6.0</maven.compiler.plugin.version>
+        <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
+        <mavne.surefire.plugin.version>2.19.1</mavne.surefire.plugin.version>
+        <maven-war-plugin.version>2.6</maven-war-plugin.version>
+        <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+
+        <springboot.dubbo.version>0.2.0</springboot.dubbo.version>
+        <jedis.version>2.9.0</jedis.version>
+
+        <dozer.version>5.5.1</dozer.version>
+        <druid.version>1.1.10</druid.version>
+        <ojdbc.version>11.2.0.3</ojdbc.version>
+        <fastjson.version>1.2.47</fastjson.version>
+        <okhttp.version>3.10.0</okhttp.version>
+        <jaxen.version>1.1.1</jaxen.version>
+        <swagger.version>2.8.0</swagger.version>
+
+        <commons-io.version>2.6</commons-io.version>
+        <reflections.version>0.9.11</reflections.version>
+
+        <!-- jacob版本 -->
+        <jacob.version>1.18</jacob.version>
+        <tika.version>1.18</tika.version>
+
+        <!--feign版本-->
+        <feign.version>10.2.0</feign.version>
+        <feign-jackson.version>8.18.0</feign-jackson.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.dist</groupId>
+                <artifactId>cs-server-api</artifactId>
+                <version>${version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dist</groupId>
+                <artifactId>cs-server-base</artifactId>
+                <version>${version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dist</groupId>
+                <artifactId>cs-server-model</artifactId>
+                <version>${version}</version>
+            </dependency>
+
+            <!--dubbo-->
+            <dependency>
+                <groupId>com.alibaba.boot</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${springboot.dubbo.version}</version>
+            </dependency>
+
+            <!--&lt;!&ndash;redis&ndash;&gt;-->
+            <!--<dependency>-->
+                <!--<groupId>redis.clients</groupId>-->
+                <!--<artifactId>jedis</artifactId>-->
+                <!--<version>${jedis.version}</version>-->
+            <!--</dependency>-->
+
+            <!-- dozer 对象间属性值赋值，不同属性名，借助map映射 -->
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer-spring</artifactId>
+                <version>${dozer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.sf.dozer</groupId>
+                <artifactId>dozer</artifactId>
+                <version>${dozer.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!--alibaba数据库池-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${ojdbc.version}</version>
+            </dependency>
+
+            <!--alibaba Json-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <!--httpClient-->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
+            <!--swagger-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jaxen</groupId>
+                <artifactId>jaxen</artifactId>
+                <version>${jaxen.version}</version>
+            </dependency>
+
+            <!--office转pdf-->
+            <dependency>
+                <groupId>com.hynnet</groupId>
+                <artifactId>jacob</artifactId>
+                <version>${jacob.version}</version>
+            </dependency>
+
+            <!--tika-->
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-parsers</artifactId>
+                <version>${tika.version}</version>
+            </dependency>
+
+            <!--反射框架-->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
+            </dependency>
+
+            <!--feign-->
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-core</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <!--Jackson编码处理-->
+            <dependency>
+                <groupId>com.netflix.feign</groupId>
+                <artifactId>feign-jackson</artifactId>
+                <version>${feign-jackson.version}</version>
+            </dependency>
+            <!--支持JAX-RS的注解处理服务请求-->
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-jaxrs</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <!--使用okhttp进行发送请求-->
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-okhttp</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+
+
+
+</project>

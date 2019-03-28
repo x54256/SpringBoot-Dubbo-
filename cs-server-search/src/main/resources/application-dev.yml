@@ -1,0 +1,10 @@
+swagger_enable: true
+
+spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 127.0.0.1:9300 # 使用tcp进行连接
+
+
+xxx: http://localhost:8081/cs-server-web/

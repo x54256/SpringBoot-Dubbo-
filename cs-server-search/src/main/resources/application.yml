@@ -1,0 +1,12 @@
+# 主配置文件主要用来存放公共设置，不受环境配置影响，实施人员可直接忽略
+server:
+  port: 8084 # 指定端口号
+  servlet:
+      context-path: /cs-server-search
+
+logging:
+  config: classpath:logback-spring.xml
+
+spring:
+  profiles:
+    active: @profile.active@ #此处由maven的环境选择决定

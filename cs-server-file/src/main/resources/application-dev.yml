@@ -1,0 +1,19 @@
+spring:
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: CSMongo
+  freemarker:
+    cache: false  #关闭模板缓存，方便测试
+    settings:
+      template_update_delay: 0
+
+
+swagger_enable: true
+
+## MDB文件下载缓存路径
+local_temp_path: /rest/public/temp
+
+#本地tomcat中报告保存位置
+report_save_file_dir: /rest/public/report/download

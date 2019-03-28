@@ -1,0 +1,28 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+
+logging:
+  config: classpath:logback-spring.xml
+
+dubbo:
+  application:
+    name: cs-server-web
+  protocol:
+    name: dubbo
+    port: 20881 # dubbo协议缺省端口20880，多个提供者会冲突
+  consumer:
+    check: false
+    timeout: 50000
+    version: 1.0.0
+  registry:
+    address: 127.0.0.1:2181
+    protocol: zookeeper
+
+swagger_enable: true
+
+
+feign:
+  file: http://127.0.0.1:8083/cs-server-file
