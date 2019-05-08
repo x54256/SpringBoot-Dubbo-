@@ -1,5 +1,6 @@
 package com.dist.base.utils.feign;
 
+import com.dist.base.utils.SPELUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -40,9 +41,17 @@ public class FeignClientImportBeanDefinitionRegistrar implements ImportBeanDefin
 
                 AbstractBeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();
 
+                FeignClient annotation = aClass.getAnnotation(FeignClient.class);
+                String requestUrl = annotation.value();
+                requestUrl = String.valueOf(SPELUtil.resolveExpression(requestUrl));
+
+                if (StringUtils.isBlank(requestUrl)) {
+                    throw new RuntimeException("请检查@FeignClient注解中请求url配置。");
+                }
+
                 beanDefinition.setBeanClass(FeignClientFactoryBean.class);
                 beanDefinition.getPropertyValues().addPropertyValue("clazz", aClass);
-                beanDefinition.getPropertyValues().addPropertyValue("basePackages", basePackages);
+                beanDefinition.getPropertyValues().addPropertyValue("requestUrl", requestUrl);
 
 
                 // 获取实现类类名，将首字母小写
