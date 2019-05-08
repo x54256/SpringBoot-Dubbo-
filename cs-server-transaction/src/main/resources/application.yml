@@ -1,0 +1,18 @@
+# 主配置文件主要用来存放公共设置，不受环境配置影响，实施人员可直接忽略
+server:
+  port: 8083 # 指定端口号
+  servlet:
+      context-path: /cs-server-transaction
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+  profiles:
+    active: @profile.active@ #此处由maven的环境选择决定
+
+logging:
+  config: classpath:logback-spring.xml
+
+swagger_enable: true

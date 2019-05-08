@@ -35,8 +35,8 @@
 
         <!--dubbo-->
         <dependency>
-            <groupId>com.alibaba.boot</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
         </dependency>
 
         <!--lombok-->
@@ -77,7 +77,6 @@
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-core</artifactId>
         </dependency>
-
         <!--Jackson编码处理-->
         <dependency>
             <groupId>com.netflix.feign</groupId>
@@ -93,6 +92,8 @@
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-okhttp</artifactId>
         </dependency>
+
+
     </dependencies>
 
 </project>

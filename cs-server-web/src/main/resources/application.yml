@@ -6,3 +6,10 @@ server:
 spring:
   profiles:
     active: @profile.active@ #此处由maven的环境选择决定
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+
+logging:
+  config: classpath:logback-spring.xml

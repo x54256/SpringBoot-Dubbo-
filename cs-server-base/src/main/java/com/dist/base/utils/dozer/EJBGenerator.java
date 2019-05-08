@@ -58,4 +58,8 @@ public class EJBGenerator implements IGenerator {
         }
         return arr;
     }
+
+    public EJBGenerator() {
+        System.out.println("111");
+    }
 }

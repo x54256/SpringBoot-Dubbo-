@@ -33,6 +33,7 @@ public class FeignInvocationHandler implements InvocationHandler {
             Void.class
     );
 
+    private final Object[] basePackages;
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -46,7 +47,7 @@ public class FeignInvocationHandler implements InvocationHandler {
         FeignClient annotation = clazz.getAnnotation(FeignClient.class);
         // 如果获取到的注解为空，则去它的子类中找
         if (annotation == null) {
-            Reflections reflections = new Reflections(FeignClientImportBeanDefinitionRegistrar.basePackages);
+            Reflections reflections = new Reflections(basePackages);
             for (Class<?> aClass : reflections.getSubTypesOf(clazz)) {
                 FeignClient childAnnotation = aClass.getAnnotation(FeignClient.class);
                 if (childAnnotation != null) {
@@ -97,6 +98,10 @@ public class FeignInvocationHandler implements InvocationHandler {
             return proxyMethod.invoke(target, args);
         }
 
-        throw new RuntimeException("请检查@FeignClient中的url是否正确！");
+        throw new RuntimeException("请检查@FeignClient注解中的url是否正确！");
+    }
+
+    FeignInvocationHandler(Object[] basePackages) {
+        this.basePackages = basePackages;
     }
 }

@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
  * @author yujx
  * @date 2019/03/27 16:41
  */
-@Path("/rest/public/resource")
+@Path("hecli")
 public interface ResourceApi {
 
     /**

@@ -19,18 +19,15 @@ import java.util.Set;
  */
 public class FeignClientImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
-    protected static Object basePackages;
-
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry registry) {
 
-        Map<String, Object> annotationAttributes = annotationMetadata.getAnnotationAttributes("com.dist.base.utils.feign.EnableFeignClients");
+        Map<String, Object> annotationAttributes = annotationMetadata.getAnnotationAttributes(EnableFeignClients.class.getName());
 
-        basePackages = annotationAttributes.get("value");
-
+        Object basePackages = annotationAttributes.get("value");
         if (basePackages != null) {
 
-            Reflections reflections = new Reflections((String[]) basePackages);
+            Reflections reflections = new Reflections((Object[]) basePackages);
 
             // 注解版
             Set<Class<?>> classSet = reflections.getTypesAnnotatedWith(FeignClient.class);
@@ -45,6 +42,7 @@ public class FeignClientImportBeanDefinitionRegistrar implements ImportBeanDefin
 
                 beanDefinition.setBeanClass(FeignClientFactoryBean.class);
                 beanDefinition.getPropertyValues().addPropertyValue("clazz", aClass);
+                beanDefinition.getPropertyValues().addPropertyValue("basePackages", basePackages);
 
 
                 // 获取实现类类名，将首字母小写
@@ -52,7 +50,6 @@ public class FeignClientImportBeanDefinitionRegistrar implements ImportBeanDefin
                 String beanName = StringUtils.uncapitalize(simpleName);
 
                 registry.registerBeanDefinition(beanName, beanDefinition);
-
             }
         }
     }

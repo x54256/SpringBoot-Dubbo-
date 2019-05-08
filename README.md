@@ -162,3 +162,13 @@
 分析：https://blog.csdn.net/mj158518/article/details/51228649
 
 实现：https://blog.csdn.net/mz4138/article/details/81814546
+
+
+
+### 1.4 rbac系统
+
+dmn层的作用就是隐藏主外键的关系，所以涉及到主外键的东西，可以像下面这样操作
+
+![](https://ws4.sinaimg.cn/large/006tNc79ly1g2bh4oek5uj30qi09g3zi.jpg)
+
+hibernate的懒加载是在用的时候才加载（for），而get操作并不会让他进行加载

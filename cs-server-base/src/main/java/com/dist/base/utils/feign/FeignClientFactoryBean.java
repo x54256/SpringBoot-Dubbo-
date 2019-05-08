@@ -14,13 +14,15 @@ public class FeignClientFactoryBean implements FactoryBean {
 
     private Class clazz;
 
+    private Object[] basePackages;
+
     @Override
     public Object getObject() throws Exception {
 
         return Proxy.newProxyInstance(
                 clazz.getClassLoader(),
                 new Class[]{clazz},
-                new FeignInvocationHandler()
+                new FeignInvocationHandler(basePackages)
         );
     }
 
@@ -35,5 +37,13 @@ public class FeignClientFactoryBean implements FactoryBean {
 
     public void setClazz(Class clazz) {
         this.clazz = clazz;
+    }
+
+    public Object[] getBasePackages() {
+        return basePackages;
+    }
+
+    public void setBasePackages(Object[] basePackages) {
+        this.basePackages = basePackages;
     }
 }

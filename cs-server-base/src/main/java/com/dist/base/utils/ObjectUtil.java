@@ -1,31 +1,41 @@
 package com.dist.base.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+
 /**
  * object对象工具
  */
 public abstract class ObjectUtil {
 
     /**
-     * 对象为空指针null
+     * 传入的对象都不为null
      *
-     * @param o
+     * @param args
      * @return
      */
-    public static final boolean isNull(Object o) {
-        if (null == o) {
-            return true;
-        }
-        return false;
-    }
+    public static boolean isNonNull(Object... args) {
 
-    /**
-     * 对象不为空指针null
-     *
-     * @param o
-     * @return
-     */
-    public static final boolean isNonNull(Object o) {
-        return !isNull(o);
+        for (Object arg : args) {
+            if (arg == null) {
+                return false;
+            }
+            if (arg instanceof String) {
+                if (StringUtils.isBlank((String) arg)) {
+                    return false;
+                }
+            }
+            if (arg instanceof List) {
+                List list = (List) arg;
+                if (list.size() <= 0) {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
     }
 
 

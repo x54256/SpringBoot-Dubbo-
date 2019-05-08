@@ -1,5 +1,7 @@
 package com.dist.base.utils;
 
+import java.util.Collection;
+
 /**
  * 数组工具
  */
@@ -58,6 +60,18 @@ public abstract class ArrayUtil {
             return true;
         }
         if (isNull(o)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 集合不为null也不为空
+     * @param o
+     * @return
+     */
+    public static final boolean isNonNullAndNonEmpty(Collection o) {
+        if (o != null && o.size() > 0){
             return true;
         }
         return false;

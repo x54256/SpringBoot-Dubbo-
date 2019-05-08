@@ -9,7 +9,7 @@ package com.dist.base.constant;
 public abstract class StatusEnum {
 
     // 是否有效
-    public enum EffectiveEnum implements IBaseEnum {
+    public enum EffectiveEnum {
         INVALID(0, "无效"),
         EFFECTIVE(1, "有效");
 
@@ -32,7 +32,7 @@ public abstract class StatusEnum {
 
 
     // 方案功能模块
-    public enum ProjectModuleEnum implements IBaseEnum {
+    public enum ProjectModuleEnum {
         RESULTS_REVIEW(1001, "成果审查"),
         BUILDING_REVIEW(1002, "建筑方案审查"),
         REGULATORY_ADJUSTMENT(1003, "控规调整"),
@@ -57,7 +57,7 @@ public abstract class StatusEnum {
 
 
     // 方案审查功能模块
-    public enum ReviewModuleEnum implements IBaseEnum {
+    public enum ReviewModuleEnum {
 
         // 建筑方案审查
         BUILDING_PROGRAM_TEXT_REVIEW(1012, "方案文本审查"),

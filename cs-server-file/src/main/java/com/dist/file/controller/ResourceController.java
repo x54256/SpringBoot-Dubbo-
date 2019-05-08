@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicStampedReference;
 
 /**
  * 资源文件的控制器
@@ -61,6 +63,11 @@ public class ResourceController extends BaseController {
             // 根据文件id下载文件
             mongoFileService.downloadFileById(mongoId, filePath);
         }
+
+        AtomicInteger atomicInteger = new AtomicInteger();
+        atomicInteger.getAndIncrement();
+
+        AtomicStampedReference<Integer> atomicStampedReference = new AtomicStampedReference<Integer>(0, 1);
 
         // 根据文件后缀判断是否需要转成pdf
         if (GlobalConstant.NEED_2_CONVERT_PDF.contains(fileSuffix.toLowerCase())) {

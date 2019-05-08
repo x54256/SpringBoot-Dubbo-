@@ -1,0 +1,55 @@
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/rbac?characterEncoding=UTF-8
+      username: root
+      password: 5456
+      driverClassName: com.mysql.jdbc.Driver
+      initialSize: 5  #初始建立连接数量
+      minIdle: 5  #最小连接数量
+      maxActive: 20 #最大连接数量
+      maxWait: 10000  #获取连接最大等待时间，毫秒
+      testOnBorrow: true #申请连接时检测连接是否有效
+      testOnReturn: false #归还连接时检测连接是否有效
+      timeBetweenEvictionRunsMillis: 60000 #配置间隔检测连接是否有效的时间（单位是毫秒）
+      minEvictableIdleTimeMillis: 300000   #连接在连接池的最小生存时间（毫秒）
+      test-while-idle: true # 指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除
+      remove-abandoned: true # 连接泄漏检测（当程序存在缺陷时，申请的连接忘记关闭，这时候，就存在连接泄漏了）
+      remove-abandoned-timeout: 1800   # 如果连接超过30分钟未关闭，就会被强行回收
+      log-abandoned: false  # 关闭abandoned连接时输出错误日志
+#      validation-query: select 1 from dual
+#      pool-prepared-statements: true  # 是否缓存游标（Oracle提供）
+      max-pool-prepared-statement-per-connection-size: 200  # 缓存游标大小
+
+      # druid内置提供了一个StatViewServlet用于展示druid的统计信息，用途包括
+      #  - 提供监控信息展示的html页面
+      #  - 提供监控信息的JSON API
+      #  - https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_StatViewServlet%E9%85%8D%E7%BD%AE
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/* # 设置页面请求的路径
+        login-username: x5456
+        login-password: 5456
+        reset-enable: true   # 允许清空统计数据
+        # allow（允许的）与deny（拒绝访问的）是控制访问权限的
+      web-stat-filter:
+        enabled: true
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*' # 需要排除一些不必要的url
+        profile-enable: true   # 监控单个url调用的sql列表
+        url-pattern: /*
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update  # 数据库的操作模式
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true # 是否在控制台打印SQL语句
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  #不加这句则默认为myisam引擎
+
+logging:
+  config: classpath:logback-spring.xml  # springBoot2.0默认就会找这个文件的
+
+
+swagger_enable: true
+
+local_temp_path: /Users/x5456/Downloads

@@ -23,6 +23,14 @@ public abstract class FileUtil {
         return suffixName;
     }
 
+    public static String getFileSuffix(String filePath) {
+        return getFileSuffix(new File(filePath));
+    }
+
+    public static String getFileName(String filePath) {
+        String fileName = new File(filePath).getName();
+        return fileName.substring(0, fileName.lastIndexOf("."));
+    }
 
     /**
      * 检查文件类型是否合法

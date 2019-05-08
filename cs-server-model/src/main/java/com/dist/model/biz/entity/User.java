@@ -3,14 +3,13 @@ package com.dist.model.biz.entity;
 import javax.persistence.*;
 
 @Entity // 告诉JPA这是一个实体类（对应数据表），不是普通的javabean
-@Table(name = "tbl_user")   // 不写这个注解，默认为这个类的小写作为名字
+@Table(name = "tb_user", uniqueConstraints = @UniqueConstraint(columnNames = {"LASTNAME", "EMAIL"}))   // 不写这个注解，默认为这个类的小写作为名字
 public class User {
  
     @Id // 标识这是主键
-    @GeneratedValue(strategy = GenerationType.AUTO) // 根据数据库自动选则主键自增类型
+//    @GeneratedValue(strategy = GenerationType.AUTO) // 根据数据库自动选则主键自增类型
     private Integer id;
- 
-    @Column(name="lastname",length = 50)    // 标识这个列的列名和属性
+
     private String lastName;
     private String email;
  
